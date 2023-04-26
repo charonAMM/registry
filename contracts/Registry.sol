@@ -1,5 +1,6 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity 0.8.19;
+import "hardhat/console.sol";
 
 /**
  @title Registry
@@ -20,6 +21,7 @@ contract Registry {
      * @param _publicKey public key to register
      */
     function register(address _a, bytes memory _publicKey) external {
+        console.log("address function", address(uint160(uint256(keccak256(_publicKey)))));
         require(
             address(uint160(uint256(keccak256(_publicKey)))) == _a,
             "address should be last 20 of hash of public key"

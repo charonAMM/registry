@@ -3,36 +3,29 @@ const { ethers } = require("hardhat");
 
 describe("Registry", function () {
   let registry;
-  let owner;
-  let addr1;
-  let addr2;
-  let addrs;
   let address, address2, address3;
   let publicKey, publicKey2, publicKey3;
-  owner, addr1, addr2;
 
   beforeEach(async function () {
     const Registry = await ethers.getContractFactory("Registry");
-    [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
     registry = await Registry.deploy();
     await registry.deployed();
 
     let wallet = ethers.Wallet.createRandom();
-    // address = wallet.address;
+    address = wallet.address;
     publicKey = wallet.publicKey;
-    address = "0x" + ethers.utils.keccak256(publicKey).slice(-40);
+
     wallet = ethers.Wallet.createRandom();
-    // address = wallet.address;
+    address2 = wallet.address;
     publicKey2 = wallet.publicKey;
-    address2 = "0x" + ethers.utils.keccak256(publicKey2).slice(-40);
+
     wallet = ethers.Wallet.createRandom();
-    // address = wallet.address;
+    address3 = wallet.address;
     publicKey3 = wallet.publicKey;
-    address3 = "0x" + ethers.utils.keccak256(publicKey3).slice(-40);
   });
 
   describe("Register", function () {
-    it("Registers a public key for a single Ethereum address", async function () {
+    it.only("Registers a public key for a single Ethereum address", async function () {
       await registry.register(address, publicKey);
       expect(await registry.getPublicKey(address)).to.equal(publicKey);
     });
