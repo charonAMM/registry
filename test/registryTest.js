@@ -15,18 +15,12 @@ function poseidon(inputs) {
 }
 
 describe("Registry", function () {
-  beforeEach(async function () {
+  before(async function () {
+    builtPoseidon = await buildPoseidon();
     const Hasher = await ethers.getContractFactory(HASH.abi, HASH.bytecode);
     hasher = await Hasher.deploy();
     await hasher.deployed();
-
     [owner, addr1, addr2] = await ethers.getSigners();
-    const Registry = await ethers.getContractFactory("Registry");
-    registry = await Registry.deploy();
-    await registry.deployed();
-
-    builtPoseidon = await buildPoseidon();
-
     // save signers private and public keys
     for (let i = 0; i < 3; i++) {
       const accounts = config.networks.hardhat.accounts;
@@ -41,6 +35,12 @@ describe("Registry", function () {
       });
       publicKeys[i] = await myKeypair.address();
     }
+  });
+  
+  beforeEach(async function () {
+    const Registry = await ethers.getContractFactory("Registry");
+    registry = await Registry.deploy();
+    await registry.deployed();
   });
 
   describe("Register", function () {
