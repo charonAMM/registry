@@ -2,6 +2,22 @@
 
 The Registry Contract allows you to map an address to a public key. It is used for verification and authentication.
 
+## Setting up and Testing
+
+requirements/dependencies
+- node
+- npm
+```
+git clone https://www.github.com/charonAMM/registry
+cd registry
+```
+
+```
+npm install
+npx hardhat hasher
+npx hardhat test
+```
+
 ## Functions
 ### register
 The `register` function allows you to register a public key to an Ethereum address. It takes two parameters: `_a`, the address to register, and `publicKey`, the public key to register. The function ensures that the address is equal to the last 20 bytes of the hash of the public key before registering it.
