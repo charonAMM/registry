@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:hasher": "npx hardhat hasher",
+    "compile": "npx hardhat compile && yarn compile:hasher"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,13 @@
   },
   "homepage": "https://github.com/charonAMM/registry#readme",
   "devDependencies": {
+    "@ethereum-waffle/provider": "^4.0.5",
     "hardhat": "^2.14.0"
+  },
+  "dependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.5",
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.7"
   }
 }
